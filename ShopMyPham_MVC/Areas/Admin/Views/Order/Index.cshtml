@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<ShopMyPham_MVC.Areas.Admin.Models.OrderModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header
+{
+    <h4 class="title1">Thông tin đơn đặt hàng</h4>
+}
+@section jsFooter
+{
+
+    <script src="/Accset/Admin/js/controller/Order.js"></script>
+    <script src="~/Accset/Admin/js/controller/OrderDetail.js"></script>
+}
+<div class="panel-body widget-shadow">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Họ Tên</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ </th>
+                <th>Email</th>
+                <th>Ngày đặt hàng</th>
+                <th>Trạng thái</th>
+                <th>Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="" id="row_@item.ID">
+                    <td>@item.NameCustomer</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Address</td>
+                    <td>@item.Email</td>
+                    <td>@item.CreatedDate.ToString("dd-MM-yyyy")</td>
+                    <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Đã giao hàng" : "Chưa giao hàng")</a></td>
+                    <td>
+                        <a href="/Admin/Order/OrderDetail/@item.ID" class="btn-action-order"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @searchString = @ViewBag.searchString }))
+</div>
+<div id="dialogDetails" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="" style="width:100%;margin-top:100px;">
+        <div class="graphs" style="margin:0 auto;text-align:center;background:#fff;width:65%;padding:15px;">
+            <div class="xs">
+                <h4 style="padding-top:20px;">Chi tiết đơn hàng</h4>
+                <div class="row" style="margin:0;">
+                    <div class="col-md-12" style="padding:0;">
+                        <div class="panel panel-primary list-panel" id="list-panel" style="margin-top:15px;">
+                            <div class="panel-body">
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>ProductName</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

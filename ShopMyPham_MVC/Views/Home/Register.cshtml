@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+ 
+    <div class="register_account">
+        <h3>Register New Account</h3>
+        <form>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'Name';}" onfocus="this.value = '';" value="Name" vk_1bf80="subscribed"></div>
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'Company Name';}" onfocus="this.value = '';" value="Company Name" vk_1bf80="subscribed"></div>
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'E-Mail';}" onfocus="this.value = '';" value="E-Mail" vk_1bf80="subscribed"></div>
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'password';}" onfocus="this.value = '';" value="password" vk_1bf80="subscribed"></div>
+                        </td>
+                        <td>
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'Address';}" onfocus="this.value = '';" value="Address" vk_1bf80="subscribed"></div>
+                    
+                            <div><input type="text" onblur="if (this.value == '') {this.value = 'City';}" onfocus="this.value = '';" value="City" vk_1bf80="subscribed"></div>
+                            <div>
+                                <input type="text" class="code" value="" vk_1bf80="subscribed"> - <input type="text" class="number" value="" vk_1bf80="subscribed">
+                                <p>Country Code + Phone Number</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="search"><div><button class="grey">Create Account</button></div></div>
+            <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+            <div class="clear"></div>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+

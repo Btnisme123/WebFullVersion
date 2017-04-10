@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<ShopMyPham_MVC.Framework.Footer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header
+{
+    Footer
+}
+<div class="panel-body widget-shadow">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nội dung</th>
+                <th>Trạng thái</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row_@item.ID">
+
+                    <td>@item.ID</td>
+                    <td>@item.Content</td>
+                    <td>@(item.Status ? "Kích hoạt" : "Khóa")</td>
+                    <td>
+                        <a href="/Admin/Footer/Edit/@item.ID">Sửa</a>
+                        |
+                        @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
+                   {
+                       Confirm = "Bạn có muốn xoá bản ghi này?",
+                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                       HttpMethod = "Delete"
+                   })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @searchString = @ViewBag.searchString }))
+</div>
+
+

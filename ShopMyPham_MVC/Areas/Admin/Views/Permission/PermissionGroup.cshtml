@@ -1,0 +1,106 @@
+﻿@using ShopMyPham_MVC.Areas.Admin.Models;
+@using ShopMyPham_MVC.Framework;
+@{
+    ViewBag.Title = "PermissionGroup";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<PermissionModel> lstPermissionModel = (List<PermissionModel>)ViewBag.lstPermissionGroup;
+    List<UserGroup> lstUserGroup = (List<UserGroup>)ViewBag.lstUserGroup;
+    int stt = 1;
+}
+@section header
+{
+    Phân quyền nhóm người dùng
+}
+
+@section jsFooter{
+        <link href="~/Accset/Admin/css/DropDownList.css" rel="stylesheet" />
+        <link href="~/Accset/Admin/css/tree-permission.css" rel="stylesheet" />
+  
+        <script src="~/Accset/Admin/js/controller/permission.js"></script>
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <div class="col-lg-2">
+                    <a href="/Admin/Permission/PermissionGroup" class="btn btn-primary">Nhóm người dùng</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="/Admin/Permission/PermissionUser" class="btn btn-default">Người dùng</a>
+                </div>
+            </div>
+
+            <div class="box-header with-border">
+                <div class="col-lg-4">
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">
+                            @ViewBag.groupName
+                            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        </button>
+                        <div id="myDropdown" class="dropdown-content">
+                            @foreach (var item in lstUserGroup)
+                            {
+                                @Html.ActionLink(@item.Name, "PermissionGroup", new { groupId = @item.ID })
+
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-lg-offset-7">
+                    @using (Html.BeginForm("PermissionGroup", "Permission", FormMethod.Post))
+                    {
+                        <input type="text" id="groupId" class="hidden" name="groupId" value="@ViewBag.groupId" />
+                        <input type="text" id="lstRoleSelected" class="hidden" name="lstRoleSelected" value="@ViewBag.currentRole" />
+                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                    }
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th class="col-lg-1">STT</th>
+                        <th class="col-lg-2">Table</th>
+                        <th>Quyền</th>
+                    </tr>
+
+                    @foreach (PermissionModel item in lstPermissionModel)
+                    {
+                        <tr>
+
+                            <td>@stt</td>
+                            <td>@item.roleTable</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <span class="glyphicon glyphicon-plus tree" id="@item.roleTable" aria-hidden="true"></span>
+                                        <input type="checkbox" id="check-@item.roleTable" name="@item.roleTable" @Html.Raw(item.CheckAll == 2 ? "checked" : "")>
+                                        <label for="@item.roleTable" id="@item.roleTable">Tất cả</label>
+
+                                        <ul id="tree-@item.roleTable" class="ul-tree">
+                                            @foreach (var roleModel in item.lstRoleModel)
+                                            {
+                                                <li>
+                                                    <input type="checkbox" class="check-role" @Html.Raw(roleModel.isChecked == true ? "checked" : "") name="tall-1" id="@roleModel.roleId" onclick="clickandshow()">
+                                                    <label for="tall-1">@roleModel.name</label>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+
+                        </tr>
+                        stt++;
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

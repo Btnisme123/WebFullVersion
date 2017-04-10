@@ -1,0 +1,92 @@
+﻿@model ShopMyPham_MVC.Framework.Menu
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header
+
+{
+    <h3 class="title1">Cập nhật menu</h3>
+}
+<div class="forms">
+    <div class="form-grids row widget-shadow" data-example-id="basic-forms" style="margin-top: -10px;">
+        <div class="form-title">
+            <h4>Menu:</h4>
+        </div>
+        <div class="form-body">
+            @using (Html.BeginForm("Edit", "Menu", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplayOrder, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Target, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Target, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ParentID, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.ParentID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.TypeID, null, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-10">
+                            <div class="">
+                                @Html.CheckBoxFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10" style="margin-bottom:15px;">
+                            <button type="submit" class="btn btn-default btn-sm">Edit</button>
+                            <button type="submit" class="btn btn-default  btn-sm">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

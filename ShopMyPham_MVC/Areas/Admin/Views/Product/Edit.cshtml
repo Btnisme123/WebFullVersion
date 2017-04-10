@@ -1,0 +1,177 @@
+﻿@model ShopMyPham_MVC.Framework.Product
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section header
+
+{
+    <h4 class="title1">Cập nhật sản phẩm </h4>
+}
+@section jsFooter
+{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+
+
+        })
+
+        var editor = CKEDITOR.replace('txtcontent', {
+            customConfig: '/Asset/Admin/js/ckeditor/config.js'
+        });
+    </script>
+}
+<div class="forms">
+    <div class="form-grids row widget-shadow" data-example-id="basic-forms" style="margin-top: -10px;">
+        <div class="form-title">
+            <h4>Product:</h4>
+        </div>
+        <div class="form-body">
+            @using (Html.BeginForm("Edit", "Product", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Title" })
+
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.ShortName, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Title Short" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.Image, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Image", @id = "txtImage" })
+                                <a id="btnSelectImage" class="btn btn-sm btn-primary" style="margin-top:15px;" href="#">Chọn ảnh</a>
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control1", @autofocus = "autofocus", @style = "height:100px;" })
+
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.Price, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Giá bán" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.PromotionPrice, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.PromotionPrice, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Giá khuyến mại" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Số lượng" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.Detail, new { @class = "form-control1", @autofocus = "autofocus", @id = "txtcontent" })
+
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "col-sm-2 control-label" })
+
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(model => model.CategoryID, ViewData["CategoryList"] as IEnumerable<SelectListItem>)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.TopHot, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.TopHot, new { @class = "form-control1", @autofocus = "autofocus", @placeholder = "Giới hạn đăng " })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.ValidationMessageFor(model => model.TopHot, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10" style="margin:10px auto;">
+                            <button type="submit" class="btn btn-default btn-sm">Update</button>
+                            <button type="submit" class="btn btn-default  btn-sm">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

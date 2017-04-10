@@ -1,0 +1,65 @@
+﻿.my-input-class {
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.my-confirm-class {
+    padding: 3px 6px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    background-color: #337ab7;
+    text-decoration: none;
+}
+
+.my-cancel-class {
+    padding: 3px 6px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    background-color: #a94442;
+    text-decoration: none;
+}
+
+.error {
+    border: solid 1px;
+    border-color: #a94442;
+}
+
+.grRequired:after {
+    content: "*";
+    color: red;
+    margin-left: 2px;
+}
+
+.required {
+    color: red;
+    margin-left: 2px;
+}
+
+.btn-action
+{
+    margin:0 auto;
+}
+.remove
+{
+    margin-left:10px;
+}
+/* for custom search field & display lenght datatable*/
+.dataTables_filter .form-control, .dataTables_length .form-control {
+    border-color: gray !important;
+}
+/* for ranking */
+ .invalid {
+        border: solid 1px;
+        border-color: #a94442;
+    }
+ .btn-Status
+ {
+     text-align:center;
+ }

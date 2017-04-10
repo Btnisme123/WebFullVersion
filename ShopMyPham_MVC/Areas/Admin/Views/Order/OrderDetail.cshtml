@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<ShopMyPham_MVC.Areas.Admin.Models.OrderDetailModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header
+{
+    <h4 class="title1">Chi tiết đơn hàng</h4>
+}
+
+<div class="panel-body widget-shadow">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sản Phẩm</th>
+                <th>Số lượng</th>
+                <th>Gía</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="" id="row_@item.ID">
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @searchString = @ViewBag.searchString }))
+</div>
+

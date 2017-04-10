@@ -1,0 +1,29 @@
+﻿@model List<ShopMyPham_MVC.Framework.Menu>
+
+<ul id="dc_mega-menu-orange" class="dc_mm-orange" style="background:rgba(0, 0, 0, 0) linear-gradient(to bottom, #414045 55%, #2f2e33 100%) repeat scroll 0 0">
+    @foreach (var item in Model.Where(x => x.ParentID == null))
+    {
+        var child = Model.Where(x => x.ParentID == item.ID);
+        //var parentClass = child.Count() > 0 ? "class=dropdown - toggle data-toggle=dropdown role=button aria-haspopup=true  aria-expanded=false" : "";
+        var icon = child.Count() > 0 ? "class=dc-mega-icon" : "";
+        <li class="">
+
+            @if (child.Count() > 0)
+                {
+                <a href="@item.Link" target="@item.Target">@item.Text.ToUpper() <span @icon></span></a>
+                    <ul>
+                        @foreach (var childItem in child)
+                    {
+                        <li><a href="@childItem.Link" target="@childItem.Target">@childItem.Text.ToUpper()</a></li>
+                    }
+
+                    </ul>
+            }
+            else
+            {
+                <a href="@item.Link" target="@item.Target">@item.Text.ToUpper()</a>
+            }
+        </li>
+    }
+</ul>
+

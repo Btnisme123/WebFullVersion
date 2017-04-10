@@ -1,0 +1,55 @@
+﻿@model PagedList.IPagedList<ShopMyPham_MVC.Framework.User>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header
+{
+    <h4 class="title1">Thông tin người dùng</h4>
+    <div style="margin-bottom:10px;">
+        <a href="/Admin/User/Create" class="btn btn-primary">Thêm mới</a>
+    </div>
+}
+@section jsFooter
+{
+    <script src="/Accset/Admin/js/controller/userController.js"></script>
+}
+<div class="panel-body widget-shadow">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tài khoản </th>
+                <th>Họ Tên</th>
+                <th>Email </th>
+                <th>Phone </th>
+                <th>Trạng thái</th>
+                <th>Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="" id="row_@item.ID">
+                    <td>@item.UserName</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
+                    <td>
+                        <a href="/Admin/User/Edit/@item.ID">Sửa</a>
+                        |
+                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                   {
+                       Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                       HttpMethod = "Delete"
+                   })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @searchString = @ViewBag.searchString }))
+</div>
